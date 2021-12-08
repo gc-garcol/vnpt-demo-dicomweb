@@ -1,0 +1,6 @@
+server:
+  port: 8085
+
+dcm4chee-archive:
+  port: 8080
+  aet: DCM4CHEE

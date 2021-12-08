@@ -1,0 +1,7 @@
+web:
+  image: nginx:1.21.3
+  volumes:
+   - ./src:/usr/share/nginx/html:ro
+   - ./conf/conf.d/:/etc/nginx/conf.d/
+  ports:
+   - "8007:80"
