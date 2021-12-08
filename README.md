@@ -30,6 +30,8 @@
 
 #### 1. {attributeID} encoding rules
 
+> {attributeID} = {dicomTag} = {dicomKeyword} = {dicomTag}.{attributeID} = {dicomKeyword}.{attributeID}
+
 {attributeID} can be one of the following:
 
 - {dicomTag}
