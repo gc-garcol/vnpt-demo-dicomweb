@@ -29,6 +29,8 @@
     var componentRenderedOrUpdatedCallback = function(){
         console.log('OHIF Viewer rendered/updated');
     }
+    // var host = "http://10.193.74.42:9080/";
+    var host = "http://localhost:8080";
     window.OHIFViewer.installViewer(
         {
             // routerBasename: '/',
@@ -36,9 +38,9 @@
                 dicomWeb: [
                     {
                         name: 'DCM4CHEE',
-                        wadoUriRoot: '/archivenode/dcm4chee-arc/aets/DCM4CHEE/wado',
-                        qidoRoot: '/archivenode/dcm4chee-arc/aets/DCM4CHEE/rs',
-                        wadoRoot: '/archivenode/dcm4chee-arc/aets/DCM4CHEE/rs',
+                        wadoUriRoot: host + '/dcm4chee-arc/aets/DCM4CHEE/wado',
+                        qidoRoot: host + '/dcm4chee-arc/aets/DCM4CHEE/rs',
+                        wadoRoot: host + '/dcm4chee-arc/aets/DCM4CHEE/rs',
                         qidoSupportsIncludeField: true,
                         imageRendering: 'wadors',
                         thumbnailRendering: 'wadors',
