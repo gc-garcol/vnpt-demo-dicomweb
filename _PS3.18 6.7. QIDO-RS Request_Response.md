@@ -264,6 +264,7 @@ http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies?limit=1&offset=1&fuz
 
 - Using [DICOM data elements](https://dicom.nema.org/medical/dicom/2017b/output/chtml/part06/chapter_6.html) 
 to map **DicomTag** to **DicomName**
+- Using [VR - value representation](https://dicom.nema.org/dicom/2013/output/chtml/part05/sect_6.2.html)
 
     - 00081190 => 0008,1190 => "Retrieve URL"
 

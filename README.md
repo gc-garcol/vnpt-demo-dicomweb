@@ -20,6 +20,7 @@
 ## IV. DOCS
 - [X] [setup dcm4chee-arc](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql) 
 - [X] [API](https://petstore.swagger.io/index.html?url=https://raw.githubusercontent.com/dcm4che/dcm4chee-arc-light/master/dcm4chee-arc-ui2/src/swagger/openapi.json#/QIDO-RS/SearchForStudies)
+- [X] [VR - value representation](https://dicom.nema.org/dicom/2013/output/chtml/part05/sect_6.2.html)
 - [X] [dicom attribute, tag, keyword](https://dicom.nema.org/medical/dicom/2017b/output/chtml/part06/chapter_6.html)
 - [X] [DICOM standard browser](https://dicom.innolitics.com/ciods/rt-dose/patient/00101002)
 - [X] [dicom wiki](https://github.com/dcm4che/dcm4chee-arc-light/wiki)
