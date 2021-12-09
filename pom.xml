@@ -13,13 +13,23 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>demo-dicomweb</name>
     <description>Demo project for Spring Boot</description>
+
+    <repositories>
+        <repository>
+            <id>www.dcm4che.org</id>
+            <name>dcm4che Repository</name>
+            <url>http://maven.dcm4che.org</url>
+        </repository>
+    </repositories>
+
     <properties>
         <java.version>1.8</java.version>
-        <weasis-dicom-tool.version>5.18.1</weasis-dicom-tool.version>
         <weasis.version>3.5.3</weasis.version>
         <dcm4che.version>5.18.1</dcm4che.version>
+        <weasis-dicom-tool.version>5.18.1</weasis-dicom-tool.version>
         <dcm4che-common.version>5.18.1</dcm4che-common.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -27,6 +27,8 @@
 - [X] [DICOM standard browser](https://dicom.innolitics.com/ciods/rt-dose/patient/00101002)
 - [X] [dicom wiki](https://github.com/dcm4che/dcm4chee-arc-light/wiki)
 - [X] [dcm4chee-arc-cs.readthedocs.io](https://dcm4chee-arc-cs.readthedocs.io/en/latest/networking/specs/qido-rs/qido-rs.html)
+- [X] [weasis-dicom-tools](https://github.com/nroduit/weasis-dicom-tools)
+- [X] [weasis github](https://github.com/nroduit/Weasis) 
 
 ### [QIDO-rs search](https://dicom.nema.org/medical/dicom/2017b/output/chtml/part18/sect_6.7.html)
 - [X] [dicom attribute, tag, keyword](https://dicom.nema.org/medical/dicom/2017b/output/chtml/part06/chapter_6.html)
