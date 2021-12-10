@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-public class TagService {
+public class TagUtil {
 
     private final TagDetailByTag tagDetailByTag;
 
