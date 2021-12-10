@@ -1,6 +1,5 @@
 package gc.garcol.demodicomweb.endpoints;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import gc.garcol.demodicomweb.service.DicomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -30,7 +31,7 @@ public class DicomController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/studies")
-    public ResponseEntity<JsonNode> findAllStudies() {
+    public ResponseEntity<List<Map<String, String>>> findAllStudies() {
         return ResponseEntity.of(Optional.ofNullable(dicomService.findAllStudies(null)));
     }
 

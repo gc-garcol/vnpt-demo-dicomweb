@@ -41,6 +41,16 @@ public class TestDicomCoreTagUtil {
         log.info(tagService.getTagDetailByTagValue(Tag.StudyInstanceUID).toString());
         log.info("===");
         log.info(tagService.getTagDetailByDicomTag(TagUtils.toHexString(Tag.StudyInstanceUID)).toString());
+
+    }
+
+    @Test
+    public void testFromHexString2() {
+        TagDetailByTag tagDetailByTag = new DicomTagConfiguration().initTagDetailByTag();
+        TagService tagService = new TagService(tagDetailByTag);
+        System.out.println(tagService.getTagDetailByDicomTag("00100010"));
+
+        System.out.println(tagService.getTagDetailByTagValue(1048592));
     }
 
 }

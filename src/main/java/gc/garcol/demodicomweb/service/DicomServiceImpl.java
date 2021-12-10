@@ -1,11 +1,14 @@
 package gc.garcol.demodicomweb.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import gc.garcol.demodicomweb.service.model.QidoRsQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dcm4che3.data.Attributes;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author garcol
@@ -27,8 +30,10 @@ public class DicomServiceImpl implements DicomService {
     }
 
     @Override
-    public JsonNode findAllStudies(QidoRsQuery qidoRsQuery) {
-        return qidoRsStudyService.queryForStudy(qidoRsQuery);
+    public List<Map<String, String>> findAllStudies(QidoRsQuery qidoRsQuery) {
+        List<Attributes> attributes = qidoRsStudyService.queryForStudy(qidoRsQuery);
+
+        return null;
     }
 
 }
