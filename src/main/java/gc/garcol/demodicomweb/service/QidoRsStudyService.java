@@ -47,6 +47,7 @@ public class QidoRsStudyService {
         return restTemplate.execute(url, HttpMethod.GET, requestCallback, responseExtractor);
     }
 
+    @SuppressWarnings("Duplicates")
     private List<Attributes> convertJson(InputStream in) {
         try {
             JSONReader reader = new JSONReader(

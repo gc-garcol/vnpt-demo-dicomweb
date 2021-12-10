@@ -1,5 +1,6 @@
 package gc.garcol.demodicomweb.service.model;
 
+import gc.garcol.demodicomweb.service.annotation.IngnoreParseQuery;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,12 +17,13 @@ import java.util.HashMap;
 @AllArgsConstructor
 public class QidoRsQuery {
 
-    private HashMap<String, String> testMap;
-
+    @IngnoreParseQuery
     private String aet;
 
+    @IngnoreParseQuery
     private String studyUID;
 
+    @IngnoreParseQuery
     private String seriesUID;
 
     private String accept;

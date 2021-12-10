@@ -17,12 +17,6 @@ public class TestWebUtil {
     public void testWebUtil() {
 
         QidoRsQuery qidoRsQuery = QidoRsQuery.builder()
-                .testMap(new HashMap<String, String>() {
-                    {
-                        put(Keyword.valueOf(Tag.StudyInstanceUID), "123123123");
-                        put(Keyword.valueOf(Tag.PatientID), "12312123");
-                    }
-                })
                 .accept("mei")
                 .aet("DCM4CHE-ARC")
                 .allOfModalitiesInStudy(true)
