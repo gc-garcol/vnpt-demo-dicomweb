@@ -60,7 +60,7 @@ public class QidoRsStudyService {
     }
 
     String toQuery(QidoRsQuery qidoRsQuery) {
-        return "00100030=20210608";
+        return "";
     }
 
 }

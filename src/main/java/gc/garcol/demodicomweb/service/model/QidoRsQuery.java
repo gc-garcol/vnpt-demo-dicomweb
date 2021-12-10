@@ -1,14 +1,22 @@
 package gc.garcol.demodicomweb.service.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 
 /**
  * @author garcol
  */
+@Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class QidoRsQuery {
+
+    private HashMap<String, String> testMap;
 
     private String aet;
 
