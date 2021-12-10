@@ -31,7 +31,7 @@ public class DicomController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/studies")
-    public ResponseEntity<List<Map<String, String>>> findAllStudies() {
+    public ResponseEntity<List<Map<String, Object>>> findAllStudies() {
         return ResponseEntity.of(Optional.ofNullable(dicomService.findAllStudies(null)));
     }
 

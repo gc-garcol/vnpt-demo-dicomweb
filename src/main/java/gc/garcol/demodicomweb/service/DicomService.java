@@ -13,6 +13,6 @@ public interface DicomService {
 
     void uploadDicomFiles(MultipartFile file);
 
-    List<Map<String, String>> findAllStudies(QidoRsQuery qidoRsQuery);
+    List<Map<String, Object>> findAllStudies(QidoRsQuery qidoRsQuery);
 
 }

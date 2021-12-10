@@ -6,7 +6,9 @@ import org.dcm4che3.util.TagUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -30,6 +32,11 @@ public class AttributeMapper {
         return dto;
     }
 
+    public List<Map<String, Object>> toDTOs(List<Attributes> attributes) {
+        return attributes.stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
 
     private String getPrivateCreator(int tag, Attributes attributes) {
         int creatorTag = 0;

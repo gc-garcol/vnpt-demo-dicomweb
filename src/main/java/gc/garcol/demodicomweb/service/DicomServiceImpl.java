@@ -1,6 +1,7 @@
 package gc.garcol.demodicomweb.service;
 
 import gc.garcol.demodicomweb.service.model.QidoRsQuery;
+import gc.garcol.demodicomweb.service.model.mapper.AttributeMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dcm4che3.data.Attributes;
@@ -20,6 +21,8 @@ public class DicomServiceImpl implements DicomService {
 
     private final QidoRsStudyService qidoRsStudyService;
 
+    private final AttributeMapper attributeMapper;
+
     @Override
     public void uploadDicomFiles(MultipartFile file) {
         try {
@@ -30,10 +33,9 @@ public class DicomServiceImpl implements DicomService {
     }
 
     @Override
-    public List<Map<String, String>> findAllStudies(QidoRsQuery qidoRsQuery) {
+    public List<Map<String, Object>> findAllStudies(QidoRsQuery qidoRsQuery) {
         List<Attributes> attributes = qidoRsStudyService.queryForStudy(qidoRsQuery);
-
-        return null;
+        return attributeMapper.toDTOs(attributes);
     }
 
 }
