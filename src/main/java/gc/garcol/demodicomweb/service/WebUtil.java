@@ -2,7 +2,6 @@ package gc.garcol.demodicomweb.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gc.garcol.demodicomweb.service.annotation.IngnoreParseQuery;
-import lombok.SneakyThrows;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -23,7 +22,6 @@ public enum  WebUtil {
         return toQuery(object, null);
     }
 
-    @SneakyThrows
     public String toQuery(Object object, List<String> exceptKey) {
         ObjectMapper objectMapper = new ObjectMapper();
         Map map = objectMapper.convertValue(object, Map.class);
