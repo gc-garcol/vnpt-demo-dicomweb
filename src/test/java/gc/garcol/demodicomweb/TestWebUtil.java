@@ -26,6 +26,8 @@ public class TestWebUtil {
                         put(Keyword.valueOf(Tag.PatientID), "12312123");
                     }
                 })
+                .ExpirationDate("123231")
+                .includefield(new String[] {"i1", "i2"})
                 .build();
 
         String queries = WebUtil.INSTANCE.toQuery(qidoRsQuery);

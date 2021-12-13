@@ -1,5 +1,6 @@
 package gc.garcol.demodicomweb.service.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import gc.garcol.demodicomweb.service.annotation.IngnoreParseQuery;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,7 @@ public class QidoRsQuery {
     @IngnoreParseQuery
     private String seriesUID;
 
+    @JsonIgnore
     private String accept;
 
     // {attributeID}={value}; {attributeID} = {dicomTag} | {dicomKeyword} | {dicomTag}.{attributeID} | {dicomKeyword}.{attributeID}

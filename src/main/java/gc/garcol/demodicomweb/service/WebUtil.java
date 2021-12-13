@@ -43,14 +43,14 @@ public enum  WebUtil {
 
             if(map.get(key).getClass().isArray()) {
                 for(Object o : (Object[]) map.get(key)) {
-                    appendQuery(key, o, queryBuilder);
+                    appendQuery(fields.get(key).getName(), o, queryBuilder);
                 }
                 continue;
             }
 
             if(map.get(key) instanceof List) {
                 for(Object o : (List) map.get(key)) {
-                    appendQuery(key, o, queryBuilder);
+                    appendQuery(fields.get(key).getName(), o, queryBuilder);
                 }
                 continue;
             }
@@ -62,7 +62,7 @@ public enum  WebUtil {
                 continue;
             }
 
-            appendQuery(key, map.get(key), queryBuilder);
+            appendQuery(fields.get(key).getName(), map.get(key), queryBuilder);
         }
 
         if (queryBuilder.length() != 0) {

@@ -50,7 +50,7 @@ public class TestDicomCoreTagUtil {
         TagUtil tagUtil = new TagUtil(tagDetailByTag);
         System.out.println(tagUtil.getTagDetailByDicomTag("00100010"));
 
-        System.out.println(tagUtil.getTagDetailByTagValue(1048592));
+        System.out.println(tagUtil.getTagDetailByTagValue(Tag.ReferringPhysicianName));
     }
 
 }
