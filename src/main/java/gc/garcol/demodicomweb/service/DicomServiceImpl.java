@@ -29,7 +29,8 @@ public class DicomServiceImpl implements DicomService {
     @Override
     public void uploadDicomFiles(MultipartFile file) {
         try {
-            StowRsService.newInstance().uploadDicom(file.getInputStream());
+//            StowRsService.newInstance().uploadDicom(file.getInputStream());
+            StowRsService.uploadSingleDicom(file.getInputStream());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

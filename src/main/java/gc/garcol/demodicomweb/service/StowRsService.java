@@ -1,15 +1,19 @@
 package gc.garcol.demodicomweb.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.dcm4che3.data.Attributes;
+import org.dcm4che3.data.Tag;
+import org.dcm4che3.data.VR;
+import org.dcm4che3.io.DicomInputStream;
+import org.dcm4che3.util.UIDUtils;
 import org.weasis.dicom.param.DicomProgress;
 import org.weasis.dicom.param.DicomState;
 import org.weasis.dicom.web.AbstractStowrs;
 import org.weasis.dicom.web.Multipart;
+import org.weasis.dicom.web.StowrsSingleFile;
+import org.weasis.dicom.web.UploadSingleFile;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +21,7 @@ import java.util.Map;
 /**
  * @author garcol
  */
+@Slf4j
 public class StowRsService extends AbstractStowrs {
 
     private final static Map<String, String> headers = new HashMap<>();
@@ -57,6 +62,23 @@ public class StowRsService extends AbstractStowrs {
         copy(inputStream, outputStream);
         Attributes error = writeEndMarkers(httpPost, outputStream);
         return new DicomState(new DicomProgress());
+    }
+
+    public static void uploadSingleDicom(InputStream inputStream) {
+        try (UploadSingleFile stowRS = new StowrsSingleFile(STOWRS_URL, Multipart.ContentType.DICOM);
+             DicomInputStream in = new DicomInputStream(inputStream)) {
+            in.setIncludeBulkData(DicomInputStream.IncludeBulkData.URI);
+            Attributes attributes = in.readDataset(-1, -1);
+//            attributes.setString(Tag.PatientName, VR.PN, "Override^Patient^Name");
+//            attributes.setString(Tag.PatientID, VR.LO, "ModifiedPatientID");
+            attributes.setString(Tag.StudyInstanceUID, VR.UI, UIDUtils.createUID());
+            attributes.setString(Tag.SeriesInstanceUID, VR.UI, UIDUtils.createUID());
+            attributes.setString(Tag.SOPInstanceUID, VR.UI, UIDUtils.createUID());
+
+            stowRS.uploadDicom(attributes, in.getTransferSyntax());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
