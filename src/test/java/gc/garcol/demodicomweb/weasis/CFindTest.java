@@ -1,5 +1,8 @@
 package gc.garcol.demodicomweb.weasis;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.dcm4che3.data.Attributes;
 import org.dcm4che3.data.Tag;
 import org.junit.jupiter.api.Test;
@@ -11,37 +14,65 @@ import org.weasis.dicom.param.DicomState;
 import java.util.List;
 
 /**
- * todo: [NOTE] not working, need to research calling DicomNode
  * Refs: weasis-dicom-tools: org/weasis/dicom/CFindNetTest.java
  * @author garcol
  */
+@Slf4j
 public class CFindTest {
 
     @Test
-    public void testProcess() {
-
+    public void originalTest() {
         DicomParam[] params = {
                 new DicomParam(Tag.PatientID, "PAT001"),
                 new DicomParam(Tag.StudyInstanceUID),
                 new DicomParam(Tag.NumberOfStudyRelatedSeries)
         };
-        DicomNode calling = new DicomNode("DCM4CHEE");
-        DicomNode called = new DicomNode("DCM4CHEE", "localhost", 8080);
+        DicomNode calling = new DicomNode("WEASIS-SCU");
+
+        log.info("calling dicomNode {}", calling.toString());
+
+        DicomNode called = new DicomNode("DICOMSERVER", "dicomserver.co.uk", 11112);
+        DicomState state = CFind.process(calling, called, params);
+        // Should never happen
+        assert state != null;
+    }
+
+    // todo note: ok
+    @Test
+    @SneakyThrows
+    public void testProcess() {
+
+        DicomParam[] params = {
+                new DicomParam(Tag.StudyInstanceUID, "1.3.12.2.1107.5.4.3.4975316777216.19951114.94101.16")
+        };
+//        DicomNode calling = new DicomNode("AS_RECEIVED", "localhost", 8080);
+//        DicomNode called = new DicomNode("DCM4CHEE", "localhost", 8080);
+
+        DicomNode calling = new DicomNode("DCM4CHEE", "localhost", 11112);
+        DicomNode called = new DicomNode("AS_RECEIVED", "localhost", 11112);
+
         DicomState state = CFind.process(calling, called, params);
 
+        log.info("==========");
+        System.out.println(state.getDicomRSP().get(0));
+        log.info("//==========");
+
         assert state != null;
+    }
 
-        List<Attributes> items = state.getDicomRSP();
-        for (int i = 0; i < items.size(); i++) {
-            Attributes item = items.get(i);
-            System.out.println("===========================================");
-            System.out.println("CFind Item " + (i + 1));
-            System.out.println("===========================================");
-            System.out.println(item.toString(100, 150));
-        }
+    @Test
+    public void testCmoveFromStagingToDev() {
+        DicomParam[] params = {
+//                new DicomParam(Tag.StudyInstanceUID, "1.3.12.2.1107.5.4.3.4975316777216.19951114.94101.16")
+        };
+        DicomNode calling = new DicomNode("DCM4CHEE", "localhost", 11112);
+//        DicomNode calling = new DicomNode("AS_RECEIVED", "10.194.11.94", 11112);
+        DicomNode called = new DicomNode("IMS_NODE1", "10.194.11.94", 11112);
+//        DicomNode called = new DicomNode("DCM4CHEE", "localhost", 11112);
+//        DicomNode calling = new DicomNode("IMS_NODE1", "10.194.11.94", 11112);
 
-        System.out.println("DICOM Status:" + state.getStatus());
-        System.out.println(state.getMessage());
+        DicomState state = CFind.process(calling, called, params);
+        System.out.println(state);
     }
 
 }
