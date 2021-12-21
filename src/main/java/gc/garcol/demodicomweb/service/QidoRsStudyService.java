@@ -30,6 +30,7 @@ import java.util.List;
 public class QidoRsStudyService {
 
     private final static String URL =  "http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies";
+//    private final static String URL = "http://localhost:8080/dcm4chee-arc/aets/AS_RECEIVED/rs/patients";
     private final static String DICOM_JSON = "application/dicom+json";
     private final static String DICOM_XML = "multipart/related;type=application/dicom+xml";
 

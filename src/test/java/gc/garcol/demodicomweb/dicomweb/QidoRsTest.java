@@ -14,7 +14,9 @@ import java.text.MessageFormat;
 @Slf4j
 public class QidoRsTest {
 
-    private final static String URL =  "http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies";
+//    private final static String URL =  "http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies";
+
+    private final static String URL =  "http://localhost:8080/dcm4chee-arc/aets/AS_RECEIVED/rs/studies";
 
     @Test
     public void testQido() {

@@ -66,7 +66,7 @@ public class CFindTest {
 //        DicomNode calling = new DicomNode("AS_RECEIVED", "localhost", 8080);
 //        DicomNode called = new DicomNode("DCM4CHEE", "localhost", 8080);
 
-        DicomNode calling = new DicomNode("DCM4CHEE");
+        DicomNode calling = new DicomNode("AS_RECEIVED");
         DicomNode called = new DicomNode("AS_RECEIVED", "localhost", 11112);
 
 //        DicomNode calling = new DicomNode("DCM4CHEE", "localhost", 11112);
@@ -93,7 +93,8 @@ public class CFindTest {
 //        DicomNode calling = new DicomNode("DCM4CHEE", "localhost", 11112);
 //        DicomNode called = new DicomNode("AS_RECEIVED", "10.194.11.94", 11112);
 
-        DicomNode called = new DicomNode("DCM4CHEE", "localhost", 11112);
+//        DicomNode called = new DicomNode("DCM4CHEE", "localhost", 11112);
+        DicomNode called = new DicomNode("AS_RECEIVED");
         DicomNode calling = new DicomNode("AS_RECEIVED", "10.194.11.94", 11112);
 
         DicomState state = CFind.process(calling, called, params);
