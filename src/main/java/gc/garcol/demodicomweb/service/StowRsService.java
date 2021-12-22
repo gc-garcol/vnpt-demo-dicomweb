@@ -31,7 +31,7 @@ public class StowRsService extends AbstractStowrs {
 
     static {
         headers.put("accept", "application/dicom+json");
-        headers.put("Archive-Node-Aet", "DCM4CHEE");
+//        headers.put("Archive-Node-Aet", "DCM4CHEE");
     }
 
     /**
@@ -71,9 +71,9 @@ public class StowRsService extends AbstractStowrs {
             Attributes attributes = in.readDataset(-1, -1);
 //            attributes.setString(Tag.PatientName, VR.PN, "Override^Patient^Name");
 //            attributes.setString(Tag.PatientID, VR.LO, "ModifiedPatientID");
-            attributes.setString(Tag.StudyInstanceUID, VR.UI, UIDUtils.createUID());
-            attributes.setString(Tag.SeriesInstanceUID, VR.UI, UIDUtils.createUID());
-            attributes.setString(Tag.SOPInstanceUID, VR.UI, UIDUtils.createUID());
+//            attributes.setString(Tag.StudyInstanceUID, VR.UI, UIDUtils.createUID());
+//            attributes.setString(Tag.SeriesInstanceUID, VR.UI, UIDUtils.createUID());
+//            attributes.setString(Tag.SOPInstanceUID, VR.UI, UIDUtils.createUID());
 
             stowRS.uploadDicom(attributes, in.getTransferSyntax());
         } catch (Exception e) {
