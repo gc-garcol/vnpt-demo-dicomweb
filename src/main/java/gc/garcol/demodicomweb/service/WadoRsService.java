@@ -1,10 +1,12 @@
 package gc.garcol.demodicomweb.service;
 
+import gc.garcol.demodicomweb.service.model.DicomByteArray;
 import gc.garcol.demodicomweb.service.model.WadoRsQry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dcm4che3.mime.MultipartInputStream;
 import org.dcm4che3.mime.MultipartParser;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,31 @@ public class WadoRsService {
         ResponseExtractor<InputStream> responseExtractor = responseExtractor();
         return restTemplate.execute(url + requestPath, HttpMethod.GET, requestCallback, responseExtractor);
     }
+
+    public byte[] retrieveStudyAsByteArray(String url, WadoRsQry wadoRsQuery) {
+        String aet = getAet(wadoRsQuery.getAet());
+        String requestPath = String.format("/aets%s/rs/studies/%s?%s", aet, wadoRsQuery.getStudyInstanceUID(), toQuery(wadoRsQuery));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Accept", "*");
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        return restTemplate.exchange(url + requestPath, HttpMethod.GET, entity, byte[].class).getBody();
+    }
+
+    public DicomByteArray retrieveStudyAsDicomByteArray(String url, WadoRsQry wadoRsQuery) {
+        String aet = getAet(wadoRsQuery.getAet());
+        String requestPath = String.format("/aets%s/rs/studies/%s?%s", aet, wadoRsQuery.getStudyInstanceUID(), toQuery(wadoRsQuery));
+        RequestCallback requestCallback = request -> request.getHeaders().add("Accept", "*");
+        ResponseExtractor<DicomByteArray> responseExtractor = (response) -> {
+            HttpHeaders httpHeaders = response.getHeaders();
+            String boundary = findValueInContentType(httpHeaders.getContentType().toString(), "boundary");
+            InputStream in = response.getBody();
+            byte[] data = toByteArray(in);
+            return new DicomByteArray(boundary, data);
+        };
+        return restTemplate.execute(url + requestPath, HttpMethod.GET, requestCallback, responseExtractor);
+    }
+
 
     public void retrieveStudy(String url, WadoRsQry wadoRsQuery, Consumer<InputStream> callback) {
         String aet = getAet(wadoRsQuery.getAet());
@@ -67,14 +94,14 @@ public class WadoRsService {
         return response -> {
             HttpHeaders httpHeaders = response.getHeaders();
             String boundary = findValueInContentType(httpHeaders.getContentType().toString(), "boundary");
-            InputStream byteArrayInputStream = toByteArrayInputStream(response.getBody());
+            ByteArrayInputStream byteArrayInputStream = toByteArrayInputStream(response.getBody());
             MultipartInputStream inputStream = new MyMultipartParser(boundary).parse(new BufferedInputStream(byteArrayInputStream));
             inputStream.readHeaderParams();
             return inputStream;
         };
     }
 
-    private InputStream toByteArrayInputStream(InputStream in) {
+    private ByteArrayInputStream toByteArrayInputStream(InputStream in) {
         try {
             byte[] buff = new byte[in.available()];
             int bytesRead;
@@ -91,6 +118,23 @@ public class WadoRsService {
         }
     }
 
+    private byte[] toByteArray(InputStream in) {
+        try {
+            byte[] buff = new byte[in.available()];
+            int bytesRead;
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+            while((bytesRead = in.read(buff)) != -1) {
+                buffer.write(buff, 0, bytesRead);
+            }
+
+            buffer.flush();
+            return buffer.toByteArray();
+
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private String findValueInContentType(String contentType, String key) {
         String[] strings = contentType.split(";");
